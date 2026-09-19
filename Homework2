@@ -1,0 +1,117 @@
+import java.util.Scanner;
+
+class Student {
+    // 멤버 변수
+    private int studentNumber;
+    private String name;
+    private String major;
+    private long phoneNumber;
+
+    // 기본 생성자
+    public Student() {
+    }
+
+    // 생성자
+    public Student(int studentNumber, String name, String major, long phoneNumber) {
+        this.studentNumber = studentNumber;
+        this.name = name;
+        this.major = major;
+        this.phoneNumber = phoneNumber;
+    }
+
+    // 학번 getter / setter
+    public int getStudentNumber() {
+        return studentNumber;
+    }
+
+    public void setStudentNumber(int studentNumber) {
+        this.studentNumber = studentNumber;
+    }
+
+    // 이름 getter / setter
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    // 전공 getter / setter
+    public String getMajor() {
+        return major;
+    }
+
+    public void setMajor(String major) {
+        this.major = major;
+    }
+
+    // 전화번호 getter / setter
+    public long getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(long phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+}
+
+public class Homework2 {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        Student[] students = new Student[3];
+
+        // 학생 3명의 정보 입력
+        for (int i = 0; i < 3; i++) {
+            System.out.print("학생의 학번, 이름, 전공, 전화번호를 입력하세요: ");
+
+            int studentNumber = Integer.parseInt(scanner.next());
+            String name = scanner.next();
+            String major = scanner.next();
+            long phoneNumber = Long.parseLong(scanner.next());
+
+            students[i] = new Student(
+                    studentNumber,
+                    name,
+                    major,
+                    phoneNumber
+            );
+        }
+
+        System.out.println();
+        System.out.println("입력된 학생들의 정보는 다음과 같습니다.");
+
+        // 학생 정보 출력
+        for (int i = 0; i < students.length; i++) {
+            Student student = students[i];
+
+            System.out.println(
+                    (i + 1) + "번째 학생: "
+                    + student.getStudentNumber() + " "
+                    + student.getName() + " "
+                    + student.getMajor() + " "
+                    + formatPhone(student.getPhoneNumber())
+            );
+        }
+
+        scanner.close();
+    }
+
+    // 전화번호를 010-xxxx-xxxx 형식으로 변환
+    public static String formatPhone(long phoneNumber) {
+        String phone = Long.toString(phoneNumber);
+
+        // 앞의 0 복구
+        if (phone.length() == 10) {
+            phone = "0" + phone;
+        }
+
+        return phone.substring(0, 3)
+                + "-"
+                + phone.substring(3, 7)
+                + "-"
+                + phone.substring(7);
+    }
+}
